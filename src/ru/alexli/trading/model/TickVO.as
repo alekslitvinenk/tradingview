@@ -1,6 +1,7 @@
 package ru.alexli.trading.model
 {
 	import flash.utils.ByteArray;
+	import flash.utils.Endian;
 	
 	public class TickVO
 	{
@@ -22,7 +23,11 @@ package ru.alexli.trading.model
 		{
 			ba.position = 0;
 			
-			time = ba.readDouble();
+			ba.endian = Endian.LITTLE_ENDIAN;
+			
+			time = ba.readInt() * 1000;
+			ba.readInt();
+			
 			bid = ba.readDouble();
 			ask = ba.readDouble();
 			last = ba.readDouble();

@@ -50,7 +50,10 @@ package ru.alexli.trading.model
 			
 			var tick:TickVO = new TickVO(ba);
 			
-			trace("timer: ", tick.bid);
+			var d:Date = new Date();
+			d.time = tick.time;
+			
+			trace("ask: ", tick.ask, ", bid: ", tick.bid, "time: ", d);
 		}
 	}
 }
