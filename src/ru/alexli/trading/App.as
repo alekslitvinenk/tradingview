@@ -1,5 +1,6 @@
 package ru.alexli.trading
 {
+	import flash.display.DisplayObject;
 	import flash.errors.IllegalOperationError;
 	
 	import ru.alexli.fcake.utils.log.LogLevel;
@@ -8,12 +9,15 @@ package ru.alexli.trading
 	import ru.alexli.fcake.view.AbstractApp;
 	import ru.alexli.trading.model.AppModel;
 	import ru.alexli.trading.model.ServiceDataProvider;
+	import ru.alexli.trading.view.ChartView;
 	
 	public class App extends AbstractApp
 	{
 		public var gmodel:AppModel;
 		
 		public var service:ServiceDataProvider;
+		
+		private var chart:DisplayObject;
 		
 		private static var canBeInstantiated:Boolean;
 		
@@ -50,6 +54,11 @@ package ru.alexli.trading
 		override protected function onAppInited():void
 		{
 			service = new ServiceDataProvider();
+			
+			addChild(chart = new ChartView());
+			chart.y = stage.stageHeight/2;
+			
+			service.start();
 		}
 	}
 }
